@@ -3,9 +3,11 @@ services:
     name: opspilot-lead-mcp
     runtime: python
     plan: free
-    buildCommand: export CARGO_HOME=/tmp/cargo && pip install -r requirements.txt
+    buildCommand: pip install -r requirements.txt
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
     envVars:
+      - key: CARGO_HOME
+        value: /tmp/cargo
       - key: PYTHON_VERSION
         value: 3.11.0
       - key: GEMINI_API_KEY
