@@ -11,6 +11,14 @@ genai.configure(api_key=settings.GEMINI_API_KEY)
 
 class GeminiService:
     def __init__(self):
+        try:
+            logger.info(f"google-generativeai version: {genai.__version__}")
+            for m in genai.list_models():
+                if 'generateContent' in m.supported_generation_methods:
+                    logger.info(f"Available model: {m.name}")
+        except Exception as e:
+            logger.error(f"Failed to list models: {e}")
+
         self.model = genai.GenerativeModel('gemini-1.5-flash')  # Free tier model
 
     async def analyze_pain(self, lead: Lead) -> Lead:
