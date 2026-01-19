@@ -11,7 +11,7 @@ genai.configure(api_key=settings.GEMINI_API_KEY)
 
 class GeminiService:
     def __init__(self):
-        self.model = genai.GenerativeModel('gemini-1.5-pro') # Or 1.5-flash for speed
+        self.model = genai.GenerativeModel('gemini-pro')  # Use gemini-pro for stable API
 
     async def analyze_pain(self, lead: Lead) -> Lead:
         prompt = f"""
