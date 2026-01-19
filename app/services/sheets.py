@@ -116,5 +116,9 @@ class SheetsService:
             self.existing_authors.add((lead.platform, lead.author_handle))
             return True
         except Exception as e:
-            logger.error(f"Error writing to Sheet: {e}")
+            error_str = str(e)
+            if "storageQuotaExceeded" in error_str:
+                logger.error("CRITICAL: Google Drive storage quota exceeded. Cannot save lead. Please free up space in the connected Google Drive account.")
+            else:
+                logger.error(f"Error writing to Sheet: {e}")
             return False

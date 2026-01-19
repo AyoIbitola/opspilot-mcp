@@ -11,11 +11,11 @@ logger = logging.getLogger(__name__)
 class TwitterService:
     def __init__(self):
         self.client = None
-        self.enabled = False
+        self.enabled = False # Explicitly disabled by user request
 
         if settings.TWITTER_USERNAME and settings.TWITTER_PASSWORD:
             self.client = Client('en-US')
-            self.enabled = True
+            # self.enabled = True # Force disabled
         else:
             logger.info("Twitter credentials not provided. Service disabled.")
 
