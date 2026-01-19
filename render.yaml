@@ -3,7 +3,7 @@ services:
     name: opspilot-lead-mcp
     runtime: python
     plan: free
-    buildCommand: pip install -r requirements.txt
+    buildCommand: mkdir -p /tmp/cargo && CARGO_HOME=/tmp/cargo CARGO_NET_GIT_FETCH_WITH_CLI=true pip install -r requirements.txt
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: CARGO_HOME
